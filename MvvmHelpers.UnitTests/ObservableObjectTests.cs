@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System;
 using System.ComponentModel;
 
@@ -7,7 +8,8 @@ namespace MvvmHelpers.UnitTests
 	[TestClass]
 	public class ObservableObjectTests
 	{
-		Person person;
+		private Person person;
+
 		[TestInitialize]
 		public void Setup()
 		{
@@ -27,7 +29,6 @@ namespace MvvmHelpers.UnitTests
 
 			person.FirstName = "Motz";
 
-
 			Assert.IsNotNull(updated, "Property changed didn't raise");
 			Assert.AreEqual(updated.PropertyName, nameof(person.FirstName), "Correct Property name didn't get raised");
 		}
@@ -43,14 +44,12 @@ namespace MvvmHelpers.UnitTests
 
 			person.FirstName = "James";
 
-
 			Assert.IsNull(updated, "Property changed was raised, but shouldn't have been");
 		}
 
 		[TestMethod]
 		public void OnChangedEvent()
 		{
-
 			var triggered = false;
 			person.Changed = () =>
 			{
@@ -77,7 +76,6 @@ namespace MvvmHelpers.UnitTests
 
 			Assert.IsTrue(triggered, "ValidateValue didn't raise");
 			Assert.AreEqual(person.FirstName, contol, "Value was not set correctly.");
-
 		}
 
 		[TestMethod]
@@ -95,7 +93,6 @@ namespace MvvmHelpers.UnitTests
 
 			Assert.IsTrue(triggered, "ValidateValue didn't raise");
 			Assert.AreEqual(person.FirstName, contol, "Value should not have been set.");
-
 		}
 
 		[TestMethod]
@@ -107,8 +104,6 @@ namespace MvvmHelpers.UnitTests
 			};
 
 			Assert.ThrowsException<ArgumentOutOfRangeException>(() => person.FirstName = "Motz", "Should throw ArgumentOutOfRangeException");
-
 		}
 	}
 }
-

@@ -22,7 +22,7 @@ namespace MvvmHelpers
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		protected virtual bool SetProperty<T>(
 			ref T backingStore, T value,
-			[CallerMemberName]string propertyName = "",
+			[CallerMemberName] string propertyName = "",
 			Action? onChanged = null,
 			Func<T, T, bool>? validateValue = null)
 		{
@@ -40,7 +40,6 @@ namespace MvvmHelpers
 			return true;
 		}
 
-
 		/// <summary>
 		/// Occurs when property changed.
 		/// </summary>
@@ -50,9 +49,7 @@ namespace MvvmHelpers
 		/// Raises the property changed event.
 		/// </summary>
 		/// <param name="propertyName">Property name.</param>
-		protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = "") =>
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
 		 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
 	}
 }
-

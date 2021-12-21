@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using MvvmHelpers.Commands;
+
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,23 +21,32 @@ namespace MvvmHelpers.UnitTests
 		}
 
 		#region Events
+
 		protected event EventHandler TestEvent
 		{
 			add => TestWeakEventManager.AddEventHandler(value);
 			remove => TestWeakEventManager.RemoveEventHandler(value);
 		}
-		#endregion
+
+		#endregion Events
 
 		#region Properties
+
 		protected const int Delay = 500;
 		protected WeakEventManager TestWeakEventManager { get; } = new WeakEventManager();
-		#endregion
+
+		#endregion Properties
 
 		#region Methods
+
 		protected Task NoParameterTask() => Task.Delay(Delay);
+
 		protected Task IntParameterTask(int delay) => Task.Delay(delay);
+
 		protected Task StringParameterTask(string text) => Task.Delay(Delay);
+
 		protected Task NoParameterImmediateNullReferenceExceptionTask() => throw new NullReferenceException();
+
 		protected Task ParameterImmediateNullReferenceExceptionTask(int delay) => throw new NullReferenceException();
 
 		protected async Task NoParameterDelayedNullReferenceExceptionTask()
@@ -51,40 +62,37 @@ namespace MvvmHelpers.UnitTests
 		}
 
 		protected bool CanExecuteTrue(object parameter) => true;
+
 		protected bool CanExecuteFalse(object parameter) => false;
+
 		protected bool CanExecuteDynamic(object booleanParameter) => (bool)booleanParameter;
-		#endregion
+
+		#endregion Methods
 
 		[TestMethod]
-		public void AsyncCommand_UsingICommand()
-		{
+		public void AsyncCommand_UsingICommand() =>
 			//Arrange
 			RefreshCommand.Execute(true);
-		}
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
-		public void AsyncCommand_NullExecuteParameter()
-		{
+		public void AsyncCommand_NullExecuteParameter() =>
 			//Arrange
 
 			//Act
 
 			//Assert
 			new AsyncCommand(null);
-		}
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
-		public void AsyncCommandT_NullExecuteParameter()
-		{
+		public void AsyncCommandT_NullExecuteParameter() =>
 			//Arrange
 
 			//Act
 
 			//Assert
 			new AsyncCommand<object>(null);
-		}
 
 		[TestMethod]
 		public async Task AsyncCommand_ExecuteAsync_IntParameter_Test()
@@ -97,7 +105,6 @@ namespace MvvmHelpers.UnitTests
 			await command.ExecuteAsync(default);
 
 			//Assert
-
 		}
 
 		[TestMethod]
@@ -111,7 +118,6 @@ namespace MvvmHelpers.UnitTests
 			await command.ExecuteAsync(default);
 
 			//Assert
-
 		}
 
 		[TestMethod]
@@ -161,7 +167,6 @@ namespace MvvmHelpers.UnitTests
 			//Assert
 			Assert.IsFalse(command.CanExecute(null));
 		}
-
 
 		[TestMethod]
 		public void AsyncCommand_CanExecuteChanged_Test()

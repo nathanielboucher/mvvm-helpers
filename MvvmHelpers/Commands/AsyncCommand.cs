@@ -1,11 +1,11 @@
 ﻿using MvvmHelpers.Interfaces;
+
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 // Lovely code from our good friend John Tririet
 // https://johnthiriet.com/mvvm-going-async-with-async-command
-
 
 namespace MvvmHelpers.Commands
 {
@@ -14,11 +14,11 @@ namespace MvvmHelpers.Commands
 	/// </summary>
 	public class AsyncCommand : IAsyncCommand
 	{
-		readonly Func<Task> execute;
-		readonly Func<object, bool>? canExecute;
-		readonly Action<Exception>? onException;
-		readonly bool continueOnCapturedContext;
-		readonly WeakEventManager weakEventManager = new WeakEventManager();
+		private readonly Func<Task> execute;
+		private readonly Func<object, bool>? canExecute;
+		private readonly Action<Exception>? onException;
+		private readonly bool continueOnCapturedContext;
+		private readonly WeakEventManager weakEventManager = new WeakEventManager();
 
 		/// <summary>
 		/// Create a new AsyncCommand
@@ -66,20 +66,22 @@ namespace MvvmHelpers.Commands
 		public void RaiseCanExecuteChanged() => weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
 
 		#region Explicit implementations
+
 		void ICommand.Execute(object parameter) => ExecuteAsync().SafeFireAndForget(onException, continueOnCapturedContext);
-		#endregion
+
+		#endregion Explicit implementations
 	}
+
 	/// <summary>
 	/// Implementation of a generic Async Command
 	/// </summary>
 	public class AsyncCommand<T> : IAsyncCommand<T>
 	{
-
-		readonly Func<T, Task> execute;
-		readonly Func<object, bool>? canExecute;
-		readonly Action<Exception>? onException;
-		readonly bool continueOnCapturedContext;
-		readonly WeakEventManager weakEventManager = new WeakEventManager();
+		private readonly Func<T, Task> execute;
+		private readonly Func<object, bool>? canExecute;
+		private readonly Action<Exception>? onException;
+		private readonly bool continueOnCapturedContext;
+		private readonly WeakEventManager weakEventManager = new WeakEventManager();
 
 		/// <summary>
 		/// Create a new AsyncCommand
@@ -132,8 +134,8 @@ namespace MvvmHelpers.Commands
 		{
 			if (CommandUtils.IsValidCommandParameter<T>(parameter))
 				ExecuteAsync((T)parameter).SafeFireAndForget(onException, continueOnCapturedContext);
-
 		}
-		#endregion
+
+		#endregion Explicit implementations
 	}
 }

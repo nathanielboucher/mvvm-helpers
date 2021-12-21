@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System;
 
 namespace MvvmHelpers.UnitTests
@@ -6,32 +7,31 @@ namespace MvvmHelpers.UnitTests
 	[TestClass]
 	public class WeakEventManagerTests
 	{
-		static int count;
+		private static int count;
 
-		static void Handler(object sender, EventArgs eventArgs)
-		{
-			count++;
-		}
+		private static void Handler(object sender, EventArgs eventArgs) => count++;
 
 		internal class TestSource
 		{
 			public int Count = 0;
 			public TestEventSource EventSource { get; set; }
+
 			public TestSource()
 			{
 				EventSource = new TestEventSource();
 				EventSource.TestEvent += EventSource_TestEvent;
 			}
+
 			public void Clean() => EventSource.TestEvent -= EventSource_TestEvent;
 
 			public void Fire() => EventSource.FireTestEvent();
 
-			void EventSource_TestEvent(object sender, EventArgs e) => Count++;
+			private void EventSource_TestEvent(object sender, EventArgs e) => Count++;
 		}
 
 		internal class TestEventSource
 		{
-			readonly WeakEventManager weakEventManager;
+			private readonly WeakEventManager weakEventManager;
 
 			public TestEventSource() => weakEventManager = new WeakEventManager();
 
@@ -43,14 +43,14 @@ namespace MvvmHelpers.UnitTests
 				remove { weakEventManager.RemoveEventHandler(value); }
 			}
 
-			void OnTestEvent() => weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(TestEvent));
+			private void OnTestEvent() => weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(TestEvent));
 		}
 
 		internal class TestSubscriber
 		{
 			public void Subscribe(TestEventSource source) => source.TestEvent += SourceOnTestEvent;
 
-			void SourceOnTestEvent(object sender, EventArgs eventArgs) => Assert.Fail();
+			private void SourceOnTestEvent(object sender, EventArgs eventArgs) => Assert.Fail();
 		}
 
 		[TestMethod]

@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using MvvmHelpers.Commands;
 using MvvmHelpers.Exceptions;
+
 using System;
 
 namespace MvvmHelpers.UnitTests
@@ -17,24 +19,15 @@ namespace MvvmHelpers.UnitTests
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
-		public void ThrowsWithNullConstructor()
-		{
-			new Command((Action)null);
-		}
+		public void ThrowsWithNullConstructor() => new Command((Action)null);
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
-		public void ThrowsWithNullParameterizedConstructor()
-		{
-			new Command((Action<object>)null);
-		}
+		public void ThrowsWithNullParameterizedConstructor() => new Command((Action<object>)null);
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
-		public void ThrowsWithNullExecuteValidCanExecute()
-		{
-			new Command(null, () => true);
-		}
+		public void ThrowsWithNullExecuteValidCanExecute() => new Command(null, () => true);
 
 		[TestMethod]
 		public void Execute()
@@ -149,12 +142,12 @@ namespace MvvmHelpers.UnitTests
 			Assert.AreEqual("Foo", result);
 		}
 
-		class FakeParentContext
+		private class FakeParentContext
 		{
 		}
 
 		// ReSharper disable once ClassNeverInstantiated.Local
-		class FakeChildContext
+		private class FakeChildContext
 		{
 		}
 

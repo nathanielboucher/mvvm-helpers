@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System.ComponentModel;
 
 namespace MvvmHelpers.UnitTests
@@ -6,7 +7,6 @@ namespace MvvmHelpers.UnitTests
 	[TestClass]
 	public class BaseViewModelTests
 	{
-
 		[TestMethod]
 		public void TitleTestMethod()
 		{
@@ -38,6 +38,7 @@ namespace MvvmHelpers.UnitTests
 			Assert.IsNotNull(updated, "Property changed didn't raise");
 			Assert.AreEqual(updated.PropertyName, nameof(vm.Subtitle), "Correct Property name didn't get raised");
 		}
+
 		[TestMethod]
 		public void CanLoadMore()
 		{
@@ -109,4 +110,3 @@ namespace MvvmHelpers.UnitTests
 		}
 	}
 }
-

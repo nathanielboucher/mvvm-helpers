@@ -1,6 +1,4 @@
-﻿using MvvmHelpers.Exceptions;
-using System;
-using System.Reflection;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace MvvmHelpers
@@ -17,7 +15,7 @@ namespace MvvmHelpers
 		/// <param name="task">Task.</param>
 		/// <param name="timeoutInMilliseconds">Timeout duration in Milliseconds.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public async static Task<T> WithTimeout<T>(this Task<T> task, int timeoutInMilliseconds)
+		public static async Task<T> WithTimeout<T>(this Task<T> task, int timeoutInMilliseconds)
 		{
 			var retTask = await Task.WhenAny(task, Task.Delay(timeoutInMilliseconds))
 				.ConfigureAwait(false);
@@ -38,6 +36,7 @@ namespace MvvmHelpers
 			WithTimeout(task, (int)timeout.TotalMilliseconds);
 
 #pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
+
 		/// <summary>
 		/// Attempts to await on the task and catches exception
 		/// </summary>
@@ -55,8 +54,6 @@ namespace MvvmHelpers
 			{
 				onException.Invoke(ex);
 			}
-		}	
-
+		}
 	}
 }
-

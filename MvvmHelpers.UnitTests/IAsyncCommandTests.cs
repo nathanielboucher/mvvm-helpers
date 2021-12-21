@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using MvvmHelpers.Commands;
 using MvvmHelpers.Interfaces;
+
+using System.Threading.Tasks;
 
 namespace MvvmHelpers.UnitTests
 {

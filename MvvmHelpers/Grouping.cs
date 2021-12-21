@@ -28,7 +28,6 @@ namespace MvvmHelpers
 			Key = key;
 			AddRange(items);
 		}
-
 	}
 
 	/// <summary>
@@ -64,7 +63,5 @@ namespace MvvmHelpers
 			SubKey = subkey;
 			AddRange(items);
 		}
-
 	}
 }
-

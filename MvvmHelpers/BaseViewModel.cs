@@ -5,7 +5,7 @@ namespace MvvmHelpers
 	/// </summary>
 	public class BaseViewModel : ObservableObject
 	{
-		string? title = string.Empty;
+		private string? title = string.Empty;
 
 		/// <summary>
 		/// Gets or sets the title.
@@ -17,7 +17,7 @@ namespace MvvmHelpers
 			set => SetProperty(ref title, value);
 		}
 
-		string? subtitle = string.Empty;
+		private string? subtitle = string.Empty;
 
 		/// <summary>
 		/// Gets or sets the subtitle.
@@ -29,7 +29,7 @@ namespace MvvmHelpers
 			set => SetProperty(ref subtitle, value);
 		}
 
-		string? icon = string.Empty;
+		private string? icon = string.Empty;
 
 		/// <summary>
 		/// Gets or sets the icon.
@@ -41,7 +41,7 @@ namespace MvvmHelpers
 			set => SetProperty(ref icon, value);
 		}
 
-		bool isBusy;
+		private bool isBusy;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this instance is busy.
@@ -57,7 +57,7 @@ namespace MvvmHelpers
 			}
 		}
 
-		bool isNotBusy = true;
+		private bool isNotBusy = true;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this instance is not busy.
@@ -73,7 +73,7 @@ namespace MvvmHelpers
 			}
 		}
 
-		bool canLoadMore = true;
+		private bool canLoadMore = true;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this instance can load more.
@@ -85,8 +85,7 @@ namespace MvvmHelpers
 			set => SetProperty(ref canLoadMore, value);
 		}
 
-
-		string? header = string.Empty;
+		private string? header = string.Empty;
 
 		/// <summary>
 		/// Gets or sets the header.
@@ -98,7 +97,7 @@ namespace MvvmHelpers
 			set => SetProperty(ref header, value);
 		}
 
-		string? footer = string.Empty;
+		private string? footer = string.Empty;
 
 		/// <summary>
 		/// Gets or sets the footer.
@@ -111,5 +110,3 @@ namespace MvvmHelpers
 		}
 	}
 }
-
-

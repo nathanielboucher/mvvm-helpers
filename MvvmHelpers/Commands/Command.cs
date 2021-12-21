@@ -3,7 +3,6 @@ using System.Windows.Input;
 
 namespace MvvmHelpers.Commands
 {
-
 	/// <summary>
 	/// Generic Implementation of ICommand
 	/// </summary>
@@ -54,9 +53,9 @@ namespace MvvmHelpers.Commands
 	/// </summary>
 	public class Command : ICommand
 	{
-		readonly Func<object, bool>? canExecute;
-		readonly Action<object> execute;
-		readonly WeakEventManager weakEventManager = new WeakEventManager();
+		private readonly Func<object, bool>? canExecute;
+		private readonly Action<object> execute;
+		private readonly WeakEventManager weakEventManager = new WeakEventManager();
 
 		/// <summary>
 		/// Command that takes an action to execute.

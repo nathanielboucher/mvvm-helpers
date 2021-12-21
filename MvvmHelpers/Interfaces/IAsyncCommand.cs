@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+
 // Lovely code from our good friend John Tririet
 // https://johnthiriet.com/mvvm-going-async-with-async-command
 
@@ -39,5 +40,4 @@ namespace MvvmHelpers.Interfaces
 		/// </summary>
 		void RaiseCanExecuteChanged();
 	}
-
 }
